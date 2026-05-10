@@ -30,7 +30,7 @@ class MarkdownDetailsFoldingBuilder : CustomFoldingBuilder(), DumbAware {
         Pattern.compile("(?is)<summary\\b[^>]*>(.*?)</summary\\s*>")
 
     // Set to true if you want to keep <details open> expanded by default.
-    private val RESPECT_OPEN_ATTRIBUTE = false
+    private val respectOpenAttribute = false
 
     override fun buildLanguageFoldRegions(
         descriptors: MutableList<FoldingDescriptor>,
@@ -46,7 +46,7 @@ class MarkdownDetailsFoldingBuilder : CustomFoldingBuilder(), DumbAware {
             val start = matcher.start()
             val end = matcher.end()
 
-            if (RESPECT_OPEN_ATTRIBUTE) {
+            if (respectOpenAttribute) {
                 val openTag = text.substring(matcher.start(), minOf(matcher.start() + 200, text.length))
                 if (openTag.contains(Regex("(?i)<details\\b[^>]*\\bopen\\b"))) {
                     // Skip adding a folding region so it stays expanded.
