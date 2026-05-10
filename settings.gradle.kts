@@ -1,5 +1,5 @@
 import org.jetbrains.intellij.platform.gradle.extensions.intellijPlatform
-rootProject.name = "collapse-markdown-details"
+rootProject.name = "jetbrains-collapse-markdown-details"
 
 plugins {
   // Configures repositories for the IntelliJ Platform Gradle Plugin 2.x

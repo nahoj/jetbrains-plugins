@@ -13,8 +13,8 @@ version = "1.0.0"
 
 dependencies {
   intellijPlatform {
-    // Target the latest stable IntelliJ IDEA release
     intellijIdeaCommunity("2025.2.4")
+    jetbrainsRuntime()
     // We depend on the bundled Markdown plugin
     bundledPlugin("org.intellij.plugins.markdown")
     // Optional helpers during development (uncomment if you want them):
@@ -33,6 +33,13 @@ intellijPlatform {
     ideaVersion {
       sinceBuild = "252"
     }
+  }
+}
+
+kotlin {
+  jvmToolchain {
+    languageVersion.set(JavaLanguageVersion.of(21))
+    vendor.set(JvmVendorSpec.JETBRAINS)
   }
 }
 
