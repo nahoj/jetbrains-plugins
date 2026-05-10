@@ -1,20 +1,41 @@
-plugins {
-  kotlin("jvm") version "2.2.20"
-  // Version is provided in settings via 'org.jetbrains.intellij.platform.settings'
-  id("org.jetbrains.intellij.platform")
-}
+import java.util.*
 
-kotlin {
-  jvmToolchain(21) // 2024.2+ requires Java 21
+plugins {
+  id("java")
+  id("org.jetbrains.kotlin.jvm") version "2.3.21"
+  id("org.jetbrains.intellij.platform") version "2.16.0"
 }
 
 group = "eu.nahoj.jetbrains"
 version = "1.0.0"
 
+// Load local.properties
+val localProperties: Properties = Properties()
+val localPropertiesFile = rootProject.file("local.properties")
+if (localPropertiesFile.exists()) {
+  localPropertiesFile.inputStream().use { stream ->
+    localProperties.load(stream)
+  }
+}
+
+repositories {
+  mavenCentral()
+  intellijPlatform {
+    defaultRepositories()
+  }
+}
+
 dependencies {
   intellijPlatform {
-    intellijIdeaCommunity("2025.2.4")
-    jetbrainsRuntime()
+    // Set e.g. `localIdePath=/snap/pycharm-community/current` in `local.properties`.
+    // Falls back to downloading the IDE from Maven if unset.
+    val localPath = localProperties.getProperty("localIdePath")
+    if (localPath != null) {
+      local(localPath)
+    } else {
+      intellijIdea("2026.1.1")
+      jetbrainsRuntime()
+    }
     // We depend on the bundled Markdown plugin
     bundledPlugin("org.intellij.plugins.markdown")
     // Optional helpers during development (uncomment if you want them):
@@ -26,9 +47,6 @@ dependencies {
 
 intellijPlatform {
   pluginConfiguration {
-    name = "Collapse Markdown Details"
-    id = "eu.nahoj.jetbrains.mddetails"
-    description = "Automatically folds HTML <details> sections in Markdown and shows <summary> as the placeholder."
     // Open-ended compatibility from 252 (2025.2) and up
     ideaVersion {
       sinceBuild = "252"
