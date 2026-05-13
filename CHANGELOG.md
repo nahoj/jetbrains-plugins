@@ -1,5 +1,9 @@
 # Changelog
+
 ## Unreleased
+
+## 1.0.1 - 2026-05-13
+
 ### Added
 
 - Use GitHub actions: standard JetBrains-plugin workflows + Dependabot.
