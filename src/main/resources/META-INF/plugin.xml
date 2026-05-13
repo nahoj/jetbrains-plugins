@@ -1,18 +1,14 @@
 <idea-plugin>
   <id>eu.nahoj.jetbrains.mddetails</id>
   <name>Collapse Markdown Details</name>
-  <version>1.0.0</version>
-  <vendor email="nahoj@crans.org">You</vendor>
-  <description>
-    Automatically folds HTML &lt;details&gt; sections in Markdown files by default and shows the &lt;summary&gt; text as the placeholder.
-  </description>
+  <vendor>Johan Grande</vendor>
+  <description><![CDATA[
+    <p>Automatically folds HTML &lt;details&gt; sections in Markdown files by default and shows the &lt;summary&gt; text as the placeholder.</p>
+    <p>A simple, hacky plugin in the absence of <a href="https://youtrack.jetbrains.com/issue/IJPL-218725/Collapse-details-in-Markdown-source-by-default-or-add-a-setting-to">a native implementation</a>.</p>
+  ]]></description>
 
-  <!-- Platform + Markdown -->
   <depends>com.intellij.modules.platform</depends>
   <depends>org.intellij.plugins.markdown</depends>
-
-  <!-- Compatible with 2025.2+ (build 252+) -->
-  <idea-version since-build="252"/>
 
   <extensions defaultExtensionNs="com.intellij">
     <lang.foldingBuilder language="Markdown"
